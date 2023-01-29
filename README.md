@@ -1,6 +1,6 @@
 # Chillys UI Clone
 
-![Visit](https://magenta-axolotl-013a87.netlify.app/)
+[Visit](https://magenta-axolotl-013a87.netlify.app/)
 
 
 ## 🚀 Project Structure
