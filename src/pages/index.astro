@@ -3,6 +3,7 @@ import Marquee from "../components/Marquee.vue";
 import Layout from "../layouts/Layout.astro";
 import "@glidejs/glide/dist/css/glide.core.min.css";
 import "@glidejs/glide/dist/css/glide.theme.min.css";
+import Card from "../components/Card.vue";
 
 const featured = [
   {
@@ -15,18 +16,21 @@ const featured = [
         title: "Bottles",
         subtitle: "From £25",
         img: "/assets/bottles.png",
+        imgAlt: "Bottles",
         link: "/",
       },
       {
         title: "Coffee Cups",
         subtitle: "From £30",
         img: "/assets/coffee.png",
+        imgAlt: "Coffee Mugs",
         link: "/",
       },
       {
         title: "Accessories",
         subtitle: "Compatible with Series 2 products",
         img: "/assets/caps.png",
+        imgAlt: "Caps",
         link: "/",
       },
     ],
@@ -41,18 +45,21 @@ const featured = [
         title: "Bottles",
         subtitle: "From £15",
         img: "/assets/original-bottles.png",
+        imgAlt: "Original Bottles",
         link: "/",
       },
       {
         title: "Coffee Cups",
         subtitle: "From £20",
         img: "/assets/original-coffee.png",
+        imgAlt: "Original Mugs",
         link: "/",
       },
       {
         title: "Accessories",
         subtitle: "Compatible with Original products",
         img: "/assets/original-caps.png",
+        imgAlt: "Original Caps",
         link: "/",
       },
     ],
@@ -89,19 +96,14 @@ const featured = [
               <div class="glide__track" data-glide-el="track">
                 <div class="glide__slides">
                   {x.products.map((y) => (
-                    <a class="featuredCategory glide__slide" href={y.link}>
-                      <img
-                        src={y.img}
-                        alt="Bottles"
-                        class="block m-auto mb-5 w-4/6 max-w-xs h-auto"
-                      />
-                      <p class="title uppercase font-semibold text-center">
-                        {y.title}
-                      </p>
-                      <p class="subtitle text-slate-500 text-center m-auto">
-                        {y.subtitle}
-                      </p>
-                    </a>
+                    <Card
+                      class="glide__slide"
+                      title={y.title}
+                      subtitle={y.subtitle}
+                      img={y.img}
+                      imgAlt={y.imgAlt}
+                      link={y.link}
+                    />
                   ))}
                 </div>
 
