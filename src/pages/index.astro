@@ -1,0 +1,180 @@
+---
+import Marquee from "../components/Marquee.vue";
+import Layout from "../layouts/Layout.astro";
+import "@glidejs/glide/dist/css/glide.core.min.css";
+import "@glidejs/glide/dist/css/glide.theme.min.css";
+
+const featured = [
+  {
+    title: "Series 2",
+    subtitle: "Three years of design, re-engineered from the base up.",
+    link: "/",
+    linkText: "Shop Now",
+    products: [
+      {
+        title: "Bottles",
+        subtitle: "From £25",
+        img: "/assets/bottles.png",
+        link: "/",
+      },
+      {
+        title: "Coffee Cups",
+        subtitle: "From £30",
+        img: "/assets/coffee.png",
+        link: "/",
+      },
+      {
+        title: "Accessories",
+        subtitle: "Compatible with Series 2 products",
+        img: "/assets/caps.png",
+        link: "/",
+      },
+    ],
+  },
+  {
+    title: "The Original",
+    subtitle: "The original Chilly's experience.",
+    link: "/",
+    linkText: "Shop Now",
+    products: [
+      {
+        title: "Bottles",
+        subtitle: "From £15",
+        img: "/assets/original-bottles.png",
+        link: "/",
+      },
+      {
+        title: "Coffee Cups",
+        subtitle: "From £20",
+        img: "/assets/original-coffee.png",
+        link: "/",
+      },
+      {
+        title: "Accessories",
+        subtitle: "Compatible with Original products",
+        img: "/assets/original-caps.png",
+        link: "/",
+      },
+    ],
+  },
+];
+---
+
+<Layout title="Fake Store">
+  <Marquee />
+  <div class="lg:container lg:mx-auto lg:pl-4 lg:pr-4 pl-4">
+    {
+      featured.map((x, i) => (
+        <div class="flex flex-wrap mb-16">
+          <div class="w-full sm:w-1/3 flex flex-col justify-center mb-16 sm:mb-0">
+            <h2
+              class={`text-4xl md:text-7xl font-semibold mb-6 ${
+                i % 2 != 0 ? "text-outline" : ""
+              }`}
+            >
+              {x.title}
+            </h2>
+            <p class="mb-5 max-w-xs">{x.subtitle}</p>
+            <div>
+              <a
+                href={x.link}
+                class="bg-black text-white rounded-full uppercase py-3 px-8 font-semibold inline-block drop-shadow-lg"
+              >
+                {x.linkText}
+              </a>
+            </div>
+          </div>
+          <div class="w-full sm:w-2/3 relative">
+            <div class={`glide${i}`}>
+              <div class="glide__track" data-glide-el="track">
+                <div class="glide__slides">
+                  {x.products.map((y) => (
+                    <a class="featuredCategory glide__slide" href={y.link}>
+                      <img
+                        src={y.img}
+                        alt="Bottles"
+                        class="block m-auto mb-5 w-4/6 max-w-xs h-auto"
+                      />
+                      <p class="title uppercase font-semibold text-center">
+                        {y.title}
+                      </p>
+                      <p class="subtitle text-slate-500 text-center m-auto">
+                        {y.subtitle}
+                      </p>
+                    </a>
+                  ))}
+                </div>
+
+                <div class="glide__arrows lg:hidden" data-glide-el="controls">
+                  <button
+                    class="glide__arrow glide__arrow--left"
+                    data-glide-dir="<"
+                  >
+                    &lt;
+                  </button>
+                  <button
+                    class="glide__arrow glide__arrow--right"
+                    data-glide-dir=">"
+                  >
+                    &gt;
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</Layout>
+
+<script>
+  import Glide from "@glidejs/glide";
+  for (let i = 0; i < 2; i++) {
+    new Glide(`.glide${i}`, {
+      perView: 3,
+      rewind: false,
+      dragThreshold: false,
+      swipeThreshold: false,
+      peek: { before: 0, after: 100 },
+      breakpoints: {
+        1024: {
+          perView: 2,
+          dragThreshold: 120,
+          swipeThreshold: 80,
+        },
+        768: {
+          perView: 1,
+          dragThreshold: 120,
+          swipeThreshold: 80,
+        },
+      },
+    }).mount();
+  }
+</script>
+
+<style lang="scss">
+  .featuredCategory {
+    cursor: url("/assets/view-cursor.png"), auto;
+    .subtitle {
+      max-width: 150px;
+    }
+  }
+  .glide__arrow {
+    color: #000;
+  }
+  .glide__arrow--disabled {
+    display: none;
+  }
+</style>
+
+<style is:global>
+  html {
+    background-color: #fff;
+  }
+
+  .text-outline {
+    -webkit-text-stroke: 1px #000;
+    color: transparent;
+  }
+</style>
